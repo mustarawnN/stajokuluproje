@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sağlık Asistanı - Eczaneniz</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Genel Sayfa Stilleri */
+body {
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/aiarkaplan.jpg') center/cover no-repeat;
+    filter: blur(5px) brightness(0.8);
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+
+/* Ana Sohbet Konteyneri */
+.chat-container {
+    width: 100%;
+    max-width: 700px; /* Maksimum genişlik */
+    height: 90vh;
+    max-height: 800px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin:auto;
+    margin-top: 27px;
+}
+
+/* 1. Başlık Alanı */
+.chat-header {
+    background-color: #007bff; /* Güven veren mavi tonu */
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+.chat-header p {
+    margin: 5px 0 0;
+    font-size: 0.8em;
+    opacity: 0.9;
+}
+
+/* 2. Sohbet Penceresi */
+.chat-window {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto; /* Mesajlar artınca scroll bar çıksın */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Mesajlar arası boşluk */
+}
+
+/* Genel Mesaj Stili */
+.message {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 80%;
+}
+.message .text {
+    padding: 12px 18px;
+    border-radius: 20px;
+    line-height: 1.5;
+}
+
+/* AI Mesaj Stili */
+.ai-message {
+    align-self: flex-start; /* Sola hizalı */
+}
+.ai-message .avatar {
+    font-size: 1.8em;
+}
+.ai-message .text {
+    background-color: #e9ecef; /* Açık gri */
+    color: #333;
+    border-bottom-left-radius: 4px; /* Daha sohbet havası katmak için */
+}
+
+/* Kullanıcı Mesaj Stili */
+.user-message {
+    align-self: flex-end; /* Sağa hizalı */
+}
+.user-message .text {
+    background-color: #007bff; /* Ana renk */
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+/* 3. Mesaj Giriş Alanı */
+.chat-input-area {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    background-color: #f8f9fa;
+}
+.chat-input-area input {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+}
+.chat-input-area input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+.chat-input-area button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+.chat-input-area button:hover {
+    background-color: #0056b3;
+}
+
+/* "Yazıyor..." Animasyonu */
+.typing .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #888;
+    border-radius: 50%;
+    animation: bounce 1.3s infinite;
+}
+.typing .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-5px); }
+}
+
+ a.back-link {
+            display: inline-block;
+            margin-top: 32px;
+             color: #eb2f06;
+            text-decoration: none;
+            font-weight: bold;
+            background: rgba(245, 250, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(30, 144, 255, 0.04);
+            transition: background 0.2s;
+            margin-left: 30px;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+            background: #eaf6ff;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>AI Sağlık Asistanı</h1>
+            <p>Lütfen unutmayın, bu asistan teşhis ve tedavi için değildir. Acil durumlar için doktorunuza başvurun.</p>
+        </div>
+
+        <div class="chat-window">
+            <div class="message ai-message">
+                <div class="avatar">🤖</div>
+                <div class="text">
+                    Merhaba! Ben IEcz'nın dijital sağlık asistanıyım. Size ilaçlar, sağlık ürünleri ve genel sağlık konularında nasıl yardımcı olabilirim?
+                </div>
+            </div>
+
+            <div class="message user-message">
+                <div class="text">Ağrı kesicilerin yan etkileri nelerdir?</div>
+            </div>
+            
+            <div class="message ai-message typing">
+                <div class="avatar">🤖</div>
+                <div class="text">
+                    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="chat-input-area">
+            <input type="text" placeholder="Sorunuzu buraya yazın...">
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </div>
+
+    </div>
+
+   <a href="index.html" class="back-link">&larr; Ana Sayfaya Dön</a>
+
+</body>
+</html>

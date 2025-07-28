@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sıkça Sorulan Sorular</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #f7fafd;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        /* Blurry full-page background using your medicine image */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/sssimages.jpg') center/cover no-repeat;
+            filter: blur(5px) brightness(0.8);
+            opacity: 0.55;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            /* Remove background color for transparent container */
+            border-radius: 18px;
+            padding: 40px 32px 32px 32px;
+            position: relative;
+        }
+
+        .faq-header-img {
+            display: block;
+            margin: 0 auto 24px auto;
+            width: 80px;
+            box-shadow: 0 2px 12px rgba(30, 144, 255, 0.15);
+        }
+
+        h1 {
+            color: #eb2f06;
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 2.3rem;
+            letter-spacing: 1px;
+        }
+
+        .faq-item {
+            margin-bottom: 18px;
+            border-bottom: 1px solid #e0e0e0;
+            background: rgba(245, 250, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(30, 144, 255, 0.04);
+            transition: box-shadow 0.2s;
+        }
+
+        .faq-item.active {
+            box-shadow: 0 4px 16px rgba(30, 144, 255, 0.10);
+        }
+
+        .faq-question {
+            cursor: pointer;
+            padding: 20px 0 18px 0;
+            font-weight: bold;
+            color: #333;
+            transition: color 0.2s;
+            padding: 10px 16px;
+            position: relative;
+            font-size: 1.08rem;
+        }
+
+        .faq-question::after {
+            content: '+ ';
+            padding-right: 8px;
+            position: absolute;
+            right: 0;
+            font-size: 22px;
+            transition: transform 0.2s;
+        }
+
+        .faq-item.active .faq-question {
+            color: #eb2f06;
+        }
+
+        .faq-item.active .faq-question::after {
+            content: '- ';
+            padding-right: 8px;
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            color: #555;
+            transition: max-height 0.3s ease;
+            padding-left: 8px;
+            padding: 0px 16px;
+            font-size: 0.98rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            margin-bottom: 16px;
+            padding-top: 8px;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 32px;
+             color: #eb2f06;
+            text-decoration: none;
+            font-weight: bold;
+            background: rgba(245, 250, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(30, 144, 255, 0.04);
+            transition: background 0.2s;
+            margin-left: 16px;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+            background: #eaf6ff;
+        }
+
+      
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <img src="images/iEcz.gif" alt="FAQ Icon" class="faq-header-img">
+        <h1>Sıkça Sorulan Sorular</h1>
+        <div class="faq-item">
+            <div class="faq-question"> Reçetemin kaç gün geçerli?</div>
+            <div class="faq-answer">
+                Bir reçetenin süresi alındığı günden itibaren toplam 4 iş günüdür.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Güneş yanığı oldu, ne sürmeliyim?</div>
+            <div class="faq-answer">
+                Güneş yanığı için öncelikle cildinizi soğuk suyla serinletin. Aloe vera içeren kremler, panthenol ve
+                nemlendirici losyonlar kullanabilirsiniz. Şiddetli yanıklarda mutlaka doktora başvurun.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Sinek ısırığına ne iyi gelir?</div>
+            <div class="faq-answer">
+                Sinek ısırığı sonrası kaşıntı ve şişliği azaltmak için antihistaminik kremler, soğuk kompres ve lokal
+                antiseptik ürünler kullanabilirsiniz.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Kene gelmesin diye ne yapabilirim?</div>
+            <div class="faq-answer">
+                Doğada bulunurken uzun kollu giysiler tercih edin, kene kovucu spreyler kullanın ve dönüşte vücudunuzu
+                kontrol edin.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Baş ağrısı için hangi ağrı kesiciyi almalıyım?</div>
+            <div class="faq-answer">
+                Hafif baş ağrılarında parasetamol veya ibuprofen kullanılabilir. Kronik veya şiddetli ağrılarda
+                doktorunuza danışınız.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Çok yorgun hissediyorum, vitamin olarak ne almalıyım?</div>
+            <div class="faq-answer">
+                B kompleks vitaminler, C vitamini ve multivitamin takviyeleri enerji desteği sağlayabilir. Uzun süreli
+                yorgunlukta doktorunuza başvurun.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Uykuya geçişte sıkıntı yaşıyorum ne önerirsiniz?</div>
+            <div class="faq-answer">
+                Melatonin takviyeleri, bitkisel çaylar (papatya, melisa) ve uyku hijyenine dikkat etmek faydalı
+                olabilir.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Bebeğimin burnu tıkalı, ne önerebilirsiniz?</div>
+            <div class="faq-answer">
+                Serum fizyolojik ile burun temizliği, burun aspiratörü kullanımı ve ortamın nemlendirilmesi önerilir.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Spor sonrası ne tür takviyeler almalıyım?</div>
+            <div class="faq-answer">
+                Protein tozları, magnezyum ve elektrolit içeren içecekler kas onarımına yardımcı olabilir. Takviye
+                kullanmadan önce uzmanınıza danışın.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question"> Kaliteli uyku için ne yapmalıyım?</div>
+            <div class="faq-answer">
+                Düzenli uyku saatleri, ekranlardan uzak durmak, hafif egzersiz ve rahatlatıcı bitki çayları kaliteli
+                uykuya yardımcı olur.
+            </div>
+        </div>
+        <a href="index.html" class="back-link">&larr; Ana Sayfaya Dön</a>
+    </div>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function () {
+                const item = this.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+
+
+
+</body>
+
+</html>

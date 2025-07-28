@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İlaç Rehberi - Eczane Siteniz</title>
+    <style>
+        /* Bu CSS kodları taslağın daha şık görünmesini sağlar. Sitenizin kendi tasarımına göre düzenleyebilirsiniz. */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+         body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('images/ilacrehberiarkaplan.jpg') center/cover no-repeat;
+            filter: blur(5px) brightness(0.8);
+            opacity: 0.55;
+            z-index: -1;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #0056b3;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .arama-kutusu {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .arama-kutusu input {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .arama-kutusu button {
+            padding: 12px 20px;
+            border: none;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .uyari-kutusu {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .ilac-listesi {
+            margin-top: 40px;
+        }
+
+        .ilac-karti {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            background-color: #ffffff;
+        }
+
+        .ilac-baslik-bolumu {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .ilac-ana-bilgi {
+            flex-grow: 1;
+        }
+
+        .ilac-ana-bilgi h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        .etken-madde {
+            font-style: italic;
+            color: #555;
+            margin: 0 0 10px 0;
+        }
+
+        .hizli-bakis span {
+            background-color: #e7f1ff;
+            color: #0056b3;
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-right: 10px;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+
+        .ilac-bilgi-sekmeleri h3 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .ilac-bilgi-sekmeleri ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+
+        /* === YENİ DÜZENLEMELER === */
+        .ilac-gorsel {
+            width: 100px;
+            height: 100px;
+            min-width: 100px;
+            /* Esnek tasarımlarda küçülmesini engeller */
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            /* Resmin köşelerinin kutudan taşmasını engeller */
+        }
+
+        .ilac-resmi {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Resmin en-boy oranını bozmadan kutuyu doldurmasını sağlar */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>İlaç Rehberi</h1>
+        <p style="text-align: center; margin-top: -20px; margin-bottom: 30px;">Aradığınız ilaç veya etken madde hakkında
+            güvenilir bilgilere ulaşın.</p>
+
+
+        <div class="ilac-listesi">
+
+            <div class="ilac-karti" id="aspirin">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/aspirin.png" alt="Aspirin 100 mg Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>ASPIRIN™ 100 mg Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Asetilsalisilik Asit</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>❤️ Kategori: Kalp-Damar</span>
+                            <span>⚕️ Reçete: Reçeteli/Reçetesiz</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Aspirin, kanı sulandırarak pıhtı oluşumunu önlemeye yardımcı olur. Bu etkisiyle kalp krizi ve
+                        inme riskini azaltmak amacıyla koruyucu tedavide kullanılır. Aynı zamanda ağrı kesici ve ateş
+                        düşürücü özellikleri de vardır.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Genellikle günde bir tablet, bir bardak su ile alınır. Mide rahatsızlığını önlemek için tok
+                        karnına alınması tavsiye edilir. Dozaj ve kullanım süresi için mutlaka doktorunuza danışın.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Mide yanması, hazımsızlık.</li>
+                        <li>Mide kanaması riski.</li>
+                        <li>Alerjik reaksiyonlar (deri döküntüsü, nefes darlığı).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="majezik">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/majezik.png" alt="Majezik 100 mg Film Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>MAJEZIK® 100 mg Film Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Flurbiprofen</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🔥 Kategori: Ağrı Kesici (NSAİİ)</span>
+                            <span>⚕️ Reçete: Reçeteli</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Majezik, romatizmal hastalıklar, diş ağrısı, adet sancıları (dismenore) ve ameliyat sonrası
+                        ağrılar gibi durumların tedavisinde kullanılan, iltihap giderici ve ağrı kesici bir ilaçtır.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Hekim tarafından başka şekilde önerilmediyse, günde 2-3 kez tok karnına alınır. Mide hassasiyeti
+                        olanların dikkatli kullanması gerekir.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Mide ağrısı, bulantı, hazımsızlık.</li>
+                        <li>Baş dönmesi, baş ağrısı.</li>
+                        <li>Ciltte döküntü.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="nurofen">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/nurofen.png" alt="Nurofen Cold & Flu Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>NUROFEN® Cold & Flu</h2>
+                        <p class="etken-madde">Etken Madde: İbuprofen, Psödoefedrin</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🤧 Kategori: Soğuk Algınlığı</span>
+                            <span>⚕️ Reçete: Reçetesiz</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Grip ve soğuk algınlığına bağlı baş ağrısı, ateş, vücut ağrıları ve burun tıkanıklığı gibi
+                        belirtilerin giderilmesinde kullanılır.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Yetişkinler için başlangıç dozu 2 tablettir. Gerekirse her 4 saatte bir 1 veya 2 tablet
+                        alınabilir. 24 saat içinde 6 tabletten fazla kullanılmamalıdır.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Uykusuzluk, sinirlilik.</li>
+                        <li>Ağız kuruluğu, mide rahatsızlığı.</li>
+                        <li>Tansiyonu yükseltebilir.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="benical">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/benical.png" alt="Benical Cold Film Kaplı Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>BENICAL® Cold Film Kaplı Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Parasetamol, Psödoefedrin, Dekstrometorfan</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🤧 Kategori: Soğuk Algınlığı</span>
+                            <span>⚕️ Reçete: Reçetesiz</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Ateş, ağrı, öksürük, burun akıntısı ve tıkanıklığı ile seyreden soğuk algınlığı ve gribal
+                        enfeksiyonların belirtilerinin tedavisinde kullanılır.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Yetişkinlerde ve 12 yaşından büyük çocuklarda günde 3-4 kez 1 tablet alınır. Dozlar arasında en
+                        az 4 saat olmalıdır.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Uyuklama, baş dönmesi.</li>
+                        <li>Bulantı, kusma.</li>
+                        <li>Ağız kuruluğu.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="arveles">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/arveles.png" alt="Arveles 25 mg Film Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>ARVELES® 25 mg Film Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Deksketoprofen</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🔥 Kategori: Ağrı Kesici (NSAİİ)</span>
+                            <span>⚕️ Reçete: Reçeteli</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Kas-iskelet sistemi ağrıları, adet sancıları ve diş ağrısı gibi hafif ve orta şiddetteki
+                        ağrıların semptomatik tedavisinde kullanılır. Hızlı etki gösteren bir ağrı kesicidir.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Genellikle her 8 saatte bir 1 tablet alınması önerilir. Günlük toplam doz 3 tableti (75 mg)
+                        geçmemelidir. Mideyi korumak için tok karnına alınmalıdır.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Mide bulantısı, kusma, karın ağrısı.</li>
+                        <li>İshal veya kabızlık.</li>
+                        <li>Baş dönmesi.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="apranax">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/apranax.jpg" alt="Apranax Fort 550 mg Film Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>APRANAX® FORT 550 mg Film Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Naproksen Sodyum</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🔥 Kategori: Ağrı Kesici (NSAİİ)</span>
+                            <span>⚕️ Reçete: Reçeteli</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Romatoid artrit, osteoartrit (kireçlenme), migren, adet sancıları ve diğer ağrılı durumların
+                        tedavisinde kullanılan güçlü bir ağrı kesici ve iltihap gidericidir.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Dozaj, hastalığın türüne ve şiddetine göre doktor tarafından ayarlanır. Genellikle günde 2 kez
+                        tok karnına alınır.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Mide ekşimesi, karın ağrısı, kabızlık.</li>
+                        <li>Baş ağrısı, uyuşukluk.</li>
+                        <li>Sıvı tutulumu (ödem).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="buscopan">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/buscopan.png" alt="Buscopan 10 mg Draje" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>BUSCOPAN® 10 mg Draje</h2>
+                        <p class="etken-madde">Etken Madde: Hiyosin-N-bütilbromür</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Draje</span>
+                            <span>💨 Kategori: Spazm Çözücü</span>
+                            <span>⚕️ Reçete: Reçeteli/Reçetesiz</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Mide, bağırsak, safra yolları ve idrar yollarındaki düz kasların kasılmalarını (spazmlarını)
+                        çözerek ağrıyı gidermek için kullanılır. Özellikle karın krampları ve adet sancılarında
+                        etkilidir.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Yetişkinlerde günde 3-5 defa 1-2 draje alınabilir. Bir miktar sıvı ile çiğnenmeden yutulmalıdır.
+                    </p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Ağız kuruluğu, ciltte kuruluk.</li>
+                        <li>Kalp atışında hızlanma (taşikardi).</li>
+                        <li>Görme bulanıklığı (nadiren).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="lansor">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/lansor.png" alt="Lansor 30 mg Mikropellet Kapsül" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>LANSOR® 30 mg Mikropellet Kapsül</h2>
+                        <p class="etken-madde">Etken Madde: Lansoprazol</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Kapsül</span>
+                            <span>🛡️ Kategori: Mide Koruyucu (PPI)</span>
+                            <span>⚕️ Reçete: Reçeteli</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Mide asidini azaltarak reflü, gastrit, mide ve onikiparmak bağırsağı ülserlerinin tedavisinde
+                        kullanılır. Mide yanması ve ekşime gibi şikayetleri giderir.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Genellikle sabahları aç karnına, yemekten yaklaşık 30 dakika önce günde bir kez alınır. Kapsül
+                        bütün olarak yutulmalıdır.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Baş ağrısı, ishal veya kabızlık.</li>
+                        <li>Karın ağrısı, gaz.</li>
+                        <li>Uzun süreli kullanımda kemik erimesi riski.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="dramamine">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/dramamine.png" alt="Dramamine 50 mg Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>DRAMAMINE® 50 mg Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Dimenhidrinat</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🚗 Kategori: Bulantı Önleyici</span>
+                            <span>⚕️ Reçete: Reçetesiz</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Taşıt tutması (deniz, araba, uçak), baş dönmesi (vertigo) ve diğer nedenlere bağlı mide bulantısı
+                        ve kusmanın önlenmesi ve tedavisinde kullanılır.</p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Yolculuktan yaklaşık 30 dakika önce 1-2 tablet alınır. Gerekirse her 4-6 saatte bir
+                        tekrarlanabilir. Günlük doz 8 tableti geçmemelidir.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Uyuşukluk ve uyku hali (en yaygın).</li>
+                        <li>Baş dönmesi, ağız kuruluğu.</li>
+                        <li>Bulanık görme.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="ilac-karti" id="xyzal">
+                <div class="ilac-baslik-bolumu">
+                    <div class="ilac-gorsel">
+                        <img src="images/xyzal.png" alt="Xyzal 5 mg Film Tablet" class="ilac-resmi">
+                    </div>
+                    <div class="ilac-ana-bilgi">
+                        <h2>XYZAL® 5 mg Film Tablet</h2>
+                        <p class="etken-madde">Etken Madde: Levosetirizin Dihidroklorür</p>
+                        <div class="hizli-bakis">
+                            <span>💊 Form: Tablet</span>
+                            <span>🌿 Kategori: Antialerjik</span>
+                            <span>⚕️ Reçete: Reçeteli</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ilac-bilgi-sekmeleri">
+                    <h3>Bu İlaç Ne İçin Kullanılır?</h3>
+                    <p>Saman nezlesi (alerjik rinit), kronik kurdeşen (ürtiker) gibi alerjik durumların neden olduğu
+                        hapşırma, burun akıntısı, kaşıntı ve göz sulanması gibi belirtilerin giderilmesinde kullanılır.
+                    </p>
+                    <h3>Nasıl Kullanılmalıdır?</h3>
+                    <p>Yetişkinler ve 6 yaş üstü çocuklar için günde bir kez 1 tablet alınması önerilir. Akşam
+                        saatlerinde alınması tercih edilebilir.</p>
+                    <h3>Yan Etkiler</h3>
+                    <ul>
+                        <li>Uyku hali, yorgunluk.</li>
+                        <li>Ağız kuruluğu.</li>
+                        <li>Baş ağrısı.</li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="uyari-kutusu">
+            <strong>⚠️ Yasal Uyarı:</strong> Bu bölümdeki bilgiler yalnızca bilgilendirme amaçlıdır. İlaç kullanımı ve
+            tedavi için mutlaka doktorunuza veya eczacınıza danışınız. Reçetesiz satılan ilaçları dahi doktor tavsiyesi
+            olmadan kullanmayınız.
+        </div>
+    </div>
+
+</body>
+
+</html>

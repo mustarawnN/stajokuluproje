@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kronik ve Akut Hastalıklar | Belirtileri | Eczane Adınız</title>
+    <style>
+        /* Genel Stil Ayarları */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 32px;
+             color: #eb2f06;
+            text-decoration: none;
+            font-weight: bold;
+            background: rgba(245, 250, 255, 0.7);
+            padding: 8px 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(30, 144, 255, 0.04);
+            transition: background 0.2s;
+            margin-left: 70px;
+            margin-bottom: 35px;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+            background: #eaf6ff;
+        }
+
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://via.placeholder.com/1920x1080/e8f5f3/005662?text=Arka+Plan+Görseli') center/cover no-repeat; /* Örnek görsel, kendi görselinizle değiştirin */
+            filter: blur(5px) brightness(0.8);
+            opacity: 0.55;
+            z-index: -1;
+        }
+
+        /* Ana Konteyner */
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 25px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Başlık Stilleri */
+        h1, h2 {
+            color: #005662;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #76c7c0;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-top: 50px;
+            margin-bottom: 25px;
+        }
+
+        p.intro {
+            font-size: 1.15em;
+            text-align: center;
+            max-width: 80%;
+            margin: 0 auto 30px auto;
+            color: #555;
+        }
+
+        body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/hastalikrehberiarkaplan.jpg') center/cover no-repeat;
+    filter: blur(5px) brightness(0.8);
+    opacity: 0.55;
+    z-index: -1;
+    pointer-events: none;
+}
+
+
+        /* Hastalık Butonları Grid Yapısı */
+        .disease-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .disease-btn {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.1em;
+            font-weight: 500;
+            padding: 18px;
+            border: 2px solid #d0e8e4;
+            border-radius: 10px;
+            background-color: #f8fdfc;
+            color: #005662;
+            cursor: pointer;
+            text-align: left;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s;
+            width: 100%;
+        }
+
+        .disease-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 86, 98, 0.12);
+            background-color: #e8f5f3;
+            border-color: #76c7c0;
+        }
+
+        .disease-btn .icon {
+            font-size: 1.8em;
+        }
+
+        /* Modal (Mini Pencere) Stilleri */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 650px; /* İçerik arttığı için biraz genişletildi */
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.8em;
+            color: #005662;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #76c7c0;
+            padding-bottom: 10px;
+        }
+        
+        .modal-body p {
+            font-size: 1.1em;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .modal-body ul {
+            list-style-type: '✓ ';
+            padding-left: 25px;
+            font-size: 1.05em;
+        }
+        
+        .modal-body ul li {
+            margin-bottom: 10px;
+            padding-left: 8px;
+        }
+
+        /* Uyarı Kutusu */
+        .warning-box {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff9e6;
+            border-left: 5px solid #ffc107;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box p {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+        
+        /* Mobil Uyum */
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px;
+                padding: 15px;
+            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.6em; }
+            p.intro { max-width: 100%; font-size: 1em;}
+            .disease-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Hastalık Rehberi</h1>
+        <p class="intro">
+            Kronik ve akut hastalıklar hakkında genel bilgilere ulaşın. Aşağıdaki butonlara tıklayarak sık görülen hastalıkların belirtileri ve tanımlarını keşfedin.
+        </p>
+
+        <h2>Kronik Hastalıklar</h2>
+        <div class="disease-grid">
+            <button class="disease-btn" data-modal-target="#kalp-modal"><span class="icon">❤️</span> Kalp ve Damar Hastalıkları</button>
+            <button class="disease-btn" data-modal-target="#hipertansiyon-modal"><span class="icon">🩺</span> Hipertansiyon (Yüksek Tansiyon)</button>
+            <button class="disease-btn" data-modal-target="#diyabet-modal"><span class="icon">🩸</span> Diyabet (Şeker Hastalığı)</button>
+            <button class="disease-btn" data-modal-target="#astim-modal"><span class="icon">🌬️</span> Astım</button>
+            <button class="disease-btn" data-modal-target="#koah-modal"><span class="icon">😮‍💨</span> KOAH</button>
+            <button class="disease-btn" data-modal-target="#bobrek-modal"><span class="icon">💧</span> Kronik Böbrek Hastalığı</button>
+            <button class="disease-btn" data-modal-target="#obezite-modal"><span class="icon">⚖️</span> Obezite</button>
+            <button class="disease-btn" data-modal-target="#artrit-modal"><span class="icon">🦴</span> Artrit (Eklem İltihabı)</button>
+            <button class="disease-btn" data-modal-target="#alzheimer-modal"><span class="icon">🧠</span> Alzheimer Hastalığı</button>
+        </div>
+
+        <h2>Akut Hastalıklar</h2>
+        <div class="disease-grid">
+            <button class="disease-btn" data-modal-target="#grip-modal"><span class="icon">🤒</span> Grip (İnfluenza)</button>
+            <button class="disease-btn" data-modal-target="#nezle-modal"><span class="icon">🤧</span> Nezle (Soğuk Algınlığı)</button>
+             <button class="disease-btn" data-modal-target="#bronsit-modal"><span class="icon">🫁</span> Akut Bronşit</button>
+            <button class="disease-btn" data-modal-target="#zaturre-modal"><span class="icon">肺炎</span> Zatürre (Pnömoni)</button>
+            <button class="disease-btn" data-modal-target="#gastro-modal"><span class="icon">🤢</span> Gastroenterit (Mide Gribi)</button>
+            <button class="disease-btn" data-modal-target="#gida-modal"><span class="icon">🤮</span> Gıda Zehirlenmesi</button>
+            <button class="disease-btn" data-modal-target="#iye-modal"><span class="icon">🚻</span> İdrar Yolu Enfeksiyonu</button>
+            <button class="disease-btn" data-modal-target="#migren-modal"><span class="icon">🤯</span> Migren Atağı</button>
+        </div>
+
+        <div class="warning-box">
+            <p>
+                <strong>Önemli Hatırlatma:</strong> Bu sayfadaki bilgiler yalnızca genel bilgilendirme amaçlıdır. Herhangi bir sağlık sorununuz veya belirtiniz varsa, doğru teşhis ve tedavi için mutlaka bir hekime veya eczacınıza danışmalısınız. Kendi kendinize teşhis koymaktan ve tedaviye başlamaktan kaçınınız.
+            </p>
+        </div>
+    </div>
+
+    <div id="modal-container">
+        <div id="kalp-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>❤️ Kalp ve Damar Hastalıkları</h3></div><div class="modal-body"><p>Kalp ve damar hastalıkları, kalbi ve vücuttaki kan damarlarını (arterler, venler) etkileyen geniş bir yelpazedeki durumları kapsayan bir şemsiye terimdir. En yaygın neden, damar duvarlarında plak birikmesiyle karakterize olan ve damarların daralmasına yol açan aterosklerozdur (damar sertliği). Bu durum, koroner arter hastalığı, kalp krizi, inme ve kalp yetmezliği gibi hayatı tehdit eden olaylara zemin hazırlayabilir. Dünya genelinde önde gelen ölüm nedenlerinden biri olmasına rağmen, risk faktörlerinin (yüksek tansiyon, yüksek kolesterol, diyabet, sigara) kontrol altına alınması ve sağlıklı yaşam tarzı seçimleriyle büyük ölçüde önlenebilir ve yönetilebilir.</p><ul><li>Göğüs ağrısı, sıkışma veya rahatsızlık hissi (anjina)</li><li>Eforla veya dinlenirken ortaya çıkan nefes darlığı</li><li>Bacaklarda ve kollarda uyuşma, güçsüzlük veya soğukluk</li><li>Baş dönmesi, sersemlik veya bayılma</li><li>Düzensiz kalp atışları (çarpıntı)</li></ul></div></div>
+        </div>
+        
+        <div id="hipertansiyon-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🩺 Hipertansiyon (Yüksek Tansiyon)</h3></div><div class="modal-body"><p>Kanın atardamar duvarlarına yaptığı basıncın sürekli olarak normalin üzerinde olması durumudur. Genellikle 'sessiz katil' olarak adlandırılır çünkü yıllarca belirgin bir semptom göstermeden kan damarlarına, kalbe, beyne, gözlere ve böbreklere yavaş yavaş zarar verebilir. Tedavi edilmediğinde kalp krizi, inme, kalp ve böbrek yetmezliği gibi ciddi komplikasyonlara yol açar. Düzenli kan basıncı ölçümü ile teşhis edilir ve genellikle yaşam tarzı değişiklikleri (tuz kısıtlaması, düzenli egzersiz) ve ilaç tedavisi ile başarılı bir şekilde kontrol altında tutulabilir. Kontrol, bu komplikasyonları önlemenin anahtarıdır.</p><ul><li>Genellikle hiçbir belirti vermez, sinsi ilerler</li><li>Şiddetli vakalarda ensede hissedilen baş ağrısı</li><li>Baş dönmesi ve sersemlik</li><li>Burun kanamaları</li><li>Nefes darlığı veya görmede bulanıklık</li></ul></div></div>
+        </div>
+
+        <div id="diyabet-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🩸 Diyabet (Şeker Hastalığı)</h3></div><div class="modal-body"><p>Pankreasın yeterli insülin üretememesi veya vücudun üretilen insülini etkili bir şekilde kullanamaması sonucu kan şekerinin (glukoz) kronik olarak yükselmesiyle karakterize bir metabolizma hastalığıdır. Kanda biriken yüksek şeker, zamanla sinirler, gözler, böbrekler ve kan damarları başta olmak üzere tüm vücuda zarar verir. Tip 1 diyabette vücut insülin üretmezken, daha yaygın olan Tip 2 diyabette insülin direnci söz konusudur. Erken teşhis, doğru beslenme, düzenli egzersiz ve gerekirse ilaç veya insülin tedavisi ile kan şekeri seviyelerini kontrol altında tutmak, komplikasyonları önlemek için hayati önem taşır.</p><ul><li>Normalden sık idrara çıkma (poliüri)</li><li>Aşırı susama ve ağız kuruluğu (polidipsi)</li><li>Sürekli ve kontrol edilemeyen açlık hissi (polifaji)</li><li>Bulanık görme</li><li>İstem dışı kilo kaybı</li><li>Yavaş iyileşen yaralar ve sık enfeksiyonlar</li><li>El ve ayaklarda karıncalanma veya uyuşma (nöropati)</li></ul></div></div>
+        </div>
+        
+        <div id="astim-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🌬️ Astım</h3></div><div class="modal-body"><p>Akciğerlerdeki hava yollarının (bronşlar) kronik olarak iltihaplı ve aşırı duyarlı olması durumudur. Bu duyarlılık nedeniyle, alerjenler, sigara dumanı, egzersiz veya soğuk hava gibi tetikleyicilerle karşılaşıldığında hava yolları aniden daralır, şişer ve aşırı mukus üretir. Bu durum, nefes almayı zorlaştıran ve ataklar halinde seyreden öksürük, hırıltı ve nefes darlığına yol açar. Astım tam olarak tedavi edilemese de, doğru ilaçlar (kontrol edici ve rahatlatıcı spreyler) ve tetikleyicilerden kaçınma yoluyla semptomlar tamamen kontrol altına alınabilir ve kişi normal bir yaşam sürdürebilir.</p><ul><li>Tekrarlayan nefes darlığı atakları</li><li>Nefes alıp verirken duyulan ıslık veya hırıltı sesi (wheezing)</li><li>Göğüste sıkışma hissi veya baskı</li><li>Özellikle gece veya sabaha karşı artan inatçı öksürük</li></ul></div></div>
+        </div>
+
+        <div id="koah-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>😮‍💨 KOAH (Kronik Obstrüktif Akciğer Hastalığı)</h3></div><div class="modal-body"><p>Akciğerlerdeki hava akışının kalıcı olarak kısıtlanmasına neden olan, ilerleyici ve tam olarak geri döndürülemeyen bir akciğer hastalığıdır. En büyük nedeni uzun süreli sigara kullanımıdır. KOAH genellikle iki durumu içerir: Kronik Bronşit (hava yollarının sürekli iltihaplı ve balgamlı olması) ve Amfizem (akciğerlerdeki küçük hava keseciklerinin hasar görmesi). Zamanla nefes darlığı artar ve günlük aktiviteleri bile yapmak zorlaşır. Sigarayı bırakmak hastalığın ilerlemesini yavaşlatmanın en etkili yoludur. Tedavi, semptomları hafifletmeyi ve yaşam kalitesini artırmayı hedefler.</p><ul><li>Özellikle sabahları belirgin, sürekli ve balgamlı öksürük</li><li>Fiziksel aktivite sırasında giderek artan nefes darlığı</li><li>Hırıltılı solunum</li><li>Göğüste sıkışma hissi</li><li>İlerleyen dönemlerde tırnaklarda ve dudaklarda morarma (siyanoz)</li></ul></div></div>
+        </div>
+        
+        <div id="bobrek-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>💧 Kronik Böbrek Hastalığı</h3></div><div class="modal-body"><p>Böbreklerin, kandaki atık ürünleri ve fazla sıvıyı süzme görevini aylar veya yıllar içinde giderek kaybetmesidir. Bu hasar genellikle ilerleyicidir ve geri döndürülemez. Erken evrelerde genellikle belirti vermediği için sinsi bir hastalıktır. En yaygın nedenleri diyabet ve yüksek tansiyondur. Hastalık ilerledikçe, vücutta tehlikeli seviyelerde sıvı, elektrolit ve atık birikebilir. Tedavi, hastalığın ilerlemesini yavaşlatmaya odaklanır. Son evrede, böbreklerin görevini yerine getirebilmek için diyaliz veya böbrek nakli gerekebilir.</p><ul><li>Halsizlik, yorgunluk ve enerji azlığı</li><li>Ayak bilekleri, ayaklar ve ellerde şişlik (ödem)</li><li>İdrar sıklığında veya miktarında değişiklik</li><li>Mide bulantısı, iştahsızlık ve kilo kaybı</li><li>Ciltte kuruluk ve inatçı kaşıntı</li><li>Kas krampları</li></ul></div></div>
+        </div>
+
+        <div id="obezite-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>⚖️ Obezite</h3></div><div class="modal-body"><p>Sadece estetik bir sorun olmayıp, vücutta sağlığı bozacak düzeyde aşırı ve anormal yağ birikmesiyle karakterize edilen karmaşık ve kronik bir hastalıktır. Vücut Kitle İndeksi (VKİ) ile sınıflandırılsa da, vücuttaki yağ dokusu metabolik olarak aktiftir ve Tip 2 diyabet, kalp hastalıkları, hipertansiyon, bazı kanser türleri ve eklem sorunları gibi birçok başka kronik hastalığın gelişiminde önemli bir risk faktörüdür. Genetik, çevresel, davranışsal ve sosyoekonomik faktörlerin bir kombinasyonundan kaynaklanır. Yönetimi, diyet, egzersiz, davranış terapisi ve bazen tıbbi tedaviyi içeren çok yönlü bir yaklaşım gerektirir.</p><ul><li>Vücut Kitle İndeksi'nin (VKİ) 30'un üzerinde olması</li><li>Özellikle bel çevresinde belirgin yağlanma</li><li>Fiziksel aktivitelerde çabuk yorulma ve nefes nefese kalma</li><li>Aşırı terleme, horlama ve uyku apnesi</li><li>Sırt, diz ve kalça gibi eklemlerde ağrı</li></ul></div></div>
+        </div>
+        
+        <div id="artrit-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🦴 Artrit (Eklem İltihabı)</h3></div><div class="modal-body"><p>Bir veya daha fazla eklemde hassasiyet ve şişliğe (iltihap) neden olan 100'den fazla durumu tanımlayan genel bir terimdir. En yaygın iki türü osteoartrit ve romatoid artrittir. Osteoartrit, eklem kıkırdağının zamanla aşınması ve yıpranması sonucu ortaya çıkarken; romatoid artrit, bağışıklık sisteminin yanlışlıkla eklemlere saldırdığı otoimmün bir hastalıktır. Artrit, kronik ağrıya, hareket kısıtlılığına ve yaşam kalitesinde önemli ölçüde düşüşe neden olabilir. Tedavi, altta yatan nedene bağlı olarak ağrıyı yönetmeyi, eklem hasarını azaltmayı ve fonksiyonu iyileştirmeyi amaçlar.</p><ul><li>Eklem ağrısı, hassasiyeti ve sertliği</li><li>Özellikle sabahları veya hareketsizlik sonrası daha belirgin olan eklem sertliği</li><li>Etkilenen eklemlerde şişlik, kızarıklık ve sıcaklık artışı</li><li>Eklem hareket kabiliyetinde azalma</li></ul></div></div>
+        </div>
+
+        <div id="alzheimer-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🧠 Alzheimer Hastalığı</h3></div><div class="modal-body"><p>Beyin hücrelerinin zamanla dejenere olup ölmesine neden olan, hafıza, düşünme, davranış ve sosyal becerilerde ilerleyici bir düşüşe yol açan nörolojik bir hastalıktır. Demansın (bunama) en yaygın nedenidir. Hastalık, beyinde anormal proteinlerin (amiloid plakları ve tau yumakları) birikmesiyle başlar. Bu birikimler sinir hücreleri arasındaki iletişimi bozar ve sonunda hücre ölümüne yol açar. Başlangıçta hafif hafıza kayıplarıyla kendini gösterirken, zamanla kişinin günlük yaşam aktivitelerini tek başına sürdüremeyeceği bir noktaya ilerler. Kesin bir tedavisi olmamakla birlikte, bazı ilaçlar semptomların ilerlemesini yavaşlatabilir.</p><ul><li>Yakın zamandaki olayları, isimleri ve konuşmaları unutma</li><li>Zaman ve mekan algısında bozulma (tarihleri karıştırma, bilinen yerlerde kaybolma)</li><li>Kelime bulmada ve konuşmayı sürdürmede zorluk</li><li>Karar verme, plan yapma ve problem çözme yeteneğinde azalma</li><li>Kişilik, ruh hali ve davranışlarda belirgin değişiklikler</li></ul></div></div>
+        </div>
+        
+        <div id="grip-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🤒 Grip (İnfluenza)</h3></div><div class="modal-body"><p>İnfluenza A ve B virüslerinin neden olduğu, oldukça bulaşıcı bir akut solunum yolu enfeksiyonudur. Genellikle soğuk algınlığı ile karıştırılsa da, gribin belirtileri çok daha ani başlar ve şiddetlidir. Ateş, kas ağrıları ve belirgin halsizlik gibi tüm vücudu etkileyen (sistemik) belirtiler ön plandadır. Genellikle 1-2 hafta içinde iyileşme görülse de, özellikle risk gruplarında (yaşlılar, kronik hastalığı olanlar, küçük çocuklar) zatürre gibi ciddi ve hayatı tehdit eden komplikasyonlara yol açabilir. Yıllık grip aşıları, hastalıktan korunmanın en etkili yoludur.</p><ul><li>Ani başlayan yüksek ateş (38°C ve üzeri)</li><li>Vücutta yaygın ve şiddetli kas ve eklem ağrıları</li><li>Baş ağrısı</li><li>Belirgin halsizlik, bitkinlik ve yorgunluk hali</li><li>Kuru, inatçı ve göğsü ağrıtan öksürük</li></ul></div></div>
+        </div>
+        
+        <div id="nezle-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🤧 Nezle (Soğuk Algınlığı)</h3></div><div class="modal-body"><p>Rinovirüsler başta olmak üzere 200'den fazla farklı virüsün neden olabildiği, üst solunum yollarını (burun ve boğaz) etkileyen hafif ve kendini sınırlayan bir enfeksiyondur. Belirtileri genellikle yavaş yavaş başlar ve gripteki gibi şiddetli sistemik semptomlar (yüksek ateş, kas ağrıları) görülmez. Bağışıklık sistemi genellikle bir hafta içinde virüsü yener. Tedavisi yoktur, ancak bol sıvı alımı, dinlenme ve semptomları hafifletmeye yönelik ilaçlar (ağrı kesiciler, dekonjestanlar) rahatlama sağlayabilir.</p><ul><li>Burun akıntısı veya tıkanıklığı</li><li>Sık sık hapşırma</li><li>Boğazda kaşıntı, kuruluk veya hafif ağrı</li><li>Genellikle ateş görülmez veya çok hafiftir (subfebril)</li><li>Gözlerde sulanma</li></ul></div></div>
+        </div>
+        
+        <div id="bronsit-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🫁 Akut Bronşit</h3></div><div class="modal-body"><p>Genellikle bir grip veya nezle gibi üst solunum yolu enfeksiyonunu takiben, akciğerlere hava taşıyan büyük hava yollarının (bronşlar) iç yüzeyinin iltihaplanmasıdır. Bu iltihaplanma, hava yollarının şişmesine ve mukus üretmesine neden olur, bu da öksürüğe yol açar. En belirgin semptomu, başlangıçta kuru olabilen ancak daha sonra sarı veya yeşil renkli balgam üreten inatçı öksürüktür. Genellikle viral kaynaklıdır ve antibiyotik tedavisi gerektirmez. Birkaç hafta içinde kendiliğinden düzelir, ancak öksürük daha uzun sürebilir.</p><ul><li>Balgamlı veya kuru, inatçı öksürük</li><li>Göğüste rahatsızlık, yanma veya sıkışma hissi</li><li>Hafif ateş ve titreme</li><li>Halsizlik ve vücut ağrıları</li><li>Hırıltılı solunum veya nefes darlığı</li></ul></div></div>
+        </div>
+
+        <div id="zaturre-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>肺炎 Zatürre (Pnömoni)</h3></div><div class="modal-body"><p>Akciğerlerdeki küçük hava keseciklerinin (alveoller) bakteri, virüs veya mantar gibi mikroorganizmalarla enfekte olması sonucu gelişen ciddi bir akciğer iltihaplanmasıdır. Bu iltihaplanma, hava keseciklerinin sıvı veya irinle dolmasına neden olur. Bu durum, vücudun yeterli oksijen almasını engeller ve nefes darlığına yol açar. Zatürre, hafif ve ayakta tedavi edilebilen bir durumdan, hastaneye yatış gerektiren ve hayatı tehdit eden bir hastalığa kadar geniş bir ciddiyet yelpazesine sahiptir. Özellikle bağışıklık sistemi zayıf olan kişilerde tehlikeli olabilir ve acil tıbbi tedavi gerektirir.</p><ul><li>Genellikle balgamlı olan öksürük (balgam sarı, yeşil, pas rengi veya kanlı olabilir)</li><li>Yüksek ateş, terleme ve titreme nöbetleri</li><li>Nefes darlığı (dinlenirken bile olabilir)</li><li>Derin nefes alırken veya öksürürken artan keskin göğüs ağrısı</li><li>Kafa karışıklığı (özellikle yaşlılarda)</li></ul></div></div>
+        </div>
+        
+        <div id="gastro-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🤢 Gastroenterit (Mide Gribi)</h3></div><div class="modal-body"><p>Halk arasında 'mide gribi' veya 'mide üşütmesi' olarak da bilinen gastroenterit, mide ve bağırsakların iltihaplanmasıdır. Genellikle norovirüs veya rotavirüs gibi son derece bulaşıcı virüslerden kaynaklanır. Virüs, sindirim sisteminin iç yüzeyine saldırarak iltihaplanmaya neden olur. Bu durum, vücudun sıvıları düzgün bir şekilde emmesini engeller ve sulu ishal ile kusmaya yol açar. En büyük tehlikesi, özellikle küçük çocuklar ve yaşlılarda hızla gelişebilen dehidrasyondur (vücudun susuz kalması). Genellikle birkaç gün içinde kendiliğinden geçer; tedavi, kaybedilen sıvıyı yerine koymaya odaklanır.</p><ul><li>Aniden başlayan sulu ishal</li><li>Şiddetli karın krampları ve ağrısı</li><li>Mide bulantısı, kusma veya her ikisi</li><li>Hafif ateş, baş ağrısı ve kas ağrıları</li></ul></div></div>
+        </div>
+        
+        <div id="gida-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🤮 Gıda Zehirlenmesi</h3></div><div class="modal-body"><p>Bakteriler (Salmonella, E. coli gibi), virüsler, parazitler veya bunların toksinleri ile kirlenmiş (kontamine) yiyecek veya içeceklerin tüketilmesinden kaynaklanan akut bir hastalıktır. Belirtiler, zehirlenmeye neden olan mikroorganizmaya ve tüketilen miktara bağlı olarak, yemekten birkaç saat sonra veya birkaç gün sonra başlayabilir. Gastroenterit ile benzer belirtiler gösterse de, kaynak kontamine gıdadır. Çoğu gıda zehirlenmesi vakası hafif seyreder ve birkaç gün içinde geçer, ancak bazı türleri (örn. botulizm) çok ciddi olabilir ve acil tıbbi müdahale gerektirir.</p><ul><li>Mide bulantısı ve şiddetli kusma</li><li>Sulu veya kanlı olabilen ishal</li><li>Karın ağrısı ve kramplar</li><li>Halsizlik, baş dönmesi ve bitkinlik</li><li>Ateş ve üşüme</li></ul></div></div>
+        </div>
+        
+        <div id="iye-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🚻 İdrar Yolu Enfeksiyonu (İYE)</h3></div><div class="modal-body"><p>Bakterilerin, normalde steril olan idrar yoluna (üretra, mesane, üreterler veya böbrekler) girmesi ve burada çoğalmasıyla oluşan bir enfeksiyondur. En sık görülen şekli, mesanenin enfekte olduğu sistittir. Eğer enfeksiyon tedavi edilmez ve böbreklere yayılırsa (piyelonefrit), daha ciddi bir durum ortaya çıkar. Anatomik nedenlerden dolayı kadınlarda daha sık görülür. Genellikle etkili antibiyotiklerle kolayca tedavi edilir, ancak tekrarlama eğilimi gösterebilir. Bol su içmek, enfeksiyon riskini azaltmaya yardımcı olur.</p><ul><li>İdrar yaparken yanma, sızlama veya ağrı hissi (dizüri)</li><li>Sık sık ve acil idrara çıkma isteği (ancak her seferinde az miktarda idrar yapma)</li><li>Bulanık, koyu renkli, kanlı veya keskin kokulu idrar</li><li>Karnın alt kısmında veya kasıklarda ağrı ve baskı hissi</li><li>Eğer enfeksiyon böbreklere yayılmışsa; ateş, titreme, sırt ve yan ağrısı</li></ul></div></div>
+        </div>
+
+        <div id="migren-modal" class="modal-overlay">
+            <div class="modal-content"><span class="modal-close">&times;</span><div class="modal-header"><h3>🤯 Migren Atağı</h3></div><div class="modal-body"><p>Migren, sadece şiddetli bir baş ağrısı olmayıp, karmaşık semptomlar bütünüyle kendini gösteren nörolojik bir durumdur. Migren atağı, bu durumun akut bir alevlenmesidir. Beyindeki sinir yollarının ve kimyasalların geçici olarak anormal bir şekilde çalışmasından kaynaklandığı düşünülmektedir. Bu durum, genellikle zonklayıcı ve tek taraflı olan, kişinin günlük yaşamını tamamen engelleyebilecek şiddette bir baş ağrısına yol açar. Ağrıya ek olarak, ışığa ve sese karşı aşırı hassasiyet gibi diğer belirtiler de tabloyu ağırlaştırır. Bazı kişilerde ataktan önce 'aura' adı verilen görsel veya duyusal bozukluklar görülebilir.</p><ul><li>Genellikle başın bir tarafında başlayan, şiddetli, zonklayıcı baş ağrısı</li><li>Işığa (fotofobi) ve sese (fonofobi) karşı aşırı hassasiyet</li><li>Mide bulantısı ve/veya kusma</li><li>Aura (atak öncesi görülen parlak ışıklar, zikzak çizgiler, uyuşma gibi geçici belirtiler)</li><li>Fiziksel aktiviteyle ağrının şiddetlenmesi</li></ul></div></div>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-link">&larr; Ana Sayfaya Dön</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const openModalButtons = document.querySelectorAll('[data-modal-target]');
+            const closeModalButtons = document.querySelectorAll('.modal-close');
+            const modalOverlays = document.querySelectorAll('.modal-overlay');
+
+            // Modalı açan butonlara tıklama olayı ekle
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = document.querySelector(button.dataset.modalTarget);
+                    openModal(modal);
+                });
+            });
+
+            // Arka plana (overlay) tıklayarak modalı kapatma
+            modalOverlays.forEach(overlay => {
+                overlay.addEventListener('click', (event) => {
+                    if (event.target === overlay) {
+                        closeModal(overlay);
+                    }
+                });
+            });
+
+            // Kapatma butonuna (X) tıklayarak modalı kapatma
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('.modal-overlay');
+                    closeModal(modal);
+                });
+            });
+
+            function openModal(modal) {
+                if (modal == null) return;
+                modal.classList.add('active');
+            }
+
+            function closeModal(modal) {
+                if (modal == null) return;
+                modal.classList.remove('active');
+            }
+            
+            // ESC tuşu ile modalı kapatma
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    const activeModal = document.querySelector('.modal-overlay.active');
+                    closeModal(activeModal);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
