@@ -6,9 +6,9 @@ Kullanıcıların ilaçlar ve hastalıklar hakkında bilgi sahibi olabileceği, 
 
 İlaç Bilgi Rehberi: İlaçların kullanım amaçları ve içerikleri hakkında detaylı bilgilendirme.
 
-Hastalık Bilgi Paneli: Yaygın hastalıklar ve belirtileri üzerine eğitici içerikler.
+Hastalık Bilgi Paneli: Yaygın hastalıklar ve belirtileri üzerine bilgiler.
 
-Yapay Zeka Hazırlığı: Proje içerisinde yapay zeka sayfası tasarlanmış olup, ilerleyen süreçte ilgili API entegrasyonlarının yapılması planlanmaktadır.
+Yapay Zeka Hazırlığı: Proje içerisinde yapay zeka sayfası tasarlanmıştır. Entegre edili değildir.
 
 Kullanıcı Odaklı Arayüz: Sade, anlaşılır ve erişilebilir tasarım.
 
