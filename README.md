@@ -1,7 +1,7 @@
-💊 Akıllı Eczane Sistemi
+##💊 Akıllı Eczane Sistemi
 Kullanıcıların ilaçlar ve hastalıklar hakkında bilgi sahibi olabileceği, modern bir arayüze sahip web tabanlı bir sağlık asistanı projesidir. Proje, temel sağlık bilgilerine hızlı erişim sağlamak ve kullanıcı deneyimini ön planda tutmak amacıyla geliştirilmiştir.
 
-✨ Özellikler
+#✨ Özellikler
 İlaç Bilgi Rehberi: İlaçların kullanım amaçları ve içerikleri hakkında detaylı bilgilendirme.
 
 Hastalık Bilgi Paneli: Yaygın hastalıklar ve belirtileri üzerine eğitici içerikler.
