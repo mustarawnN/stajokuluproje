@@ -1,16 +1,19 @@
-##💊 Akıllı Eczane Sistemi
+💊 Akıllı Eczane Sistemi
+
 Kullanıcıların ilaçlar ve hastalıklar hakkında bilgi sahibi olabileceği, modern bir arayüze sahip web tabanlı bir sağlık asistanı projesidir. Proje, temel sağlık bilgilerine hızlı erişim sağlamak ve kullanıcı deneyimini ön planda tutmak amacıyla geliştirilmiştir.
 
-#✨ Özellikler
+✨ Özellikler
+
 İlaç Bilgi Rehberi: İlaçların kullanım amaçları ve içerikleri hakkında detaylı bilgilendirme.
 
 Hastalık Bilgi Paneli: Yaygın hastalıklar ve belirtileri üzerine eğitici içerikler.
 
-Yapay Zeka Hazırlığı: Proje içerisinde yapay zeka sayfası tasarlanmıştır.
+Yapay Zeka Hazırlığı: Proje içerisinde yapay zeka sayfası tasarlanmış olup, ilerleyen süreçte ilgili API entegrasyonlarının yapılması planlanmaktadır.
 
 Kullanıcı Odaklı Arayüz: Sade, anlaşılır ve erişilebilir tasarım.
 
 🛠️ Kullanılan Teknolojiler
-Frontend: HTML5, CSS3, JavaScript
 
-Tasarım: Modern UI/UX prensipleri
+Frontend: HTML5, CSS3, JavaScript.
+
+Tasarım: Modern UI/UX Prensipleri.
